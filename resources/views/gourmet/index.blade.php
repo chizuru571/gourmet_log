@@ -62,8 +62,8 @@
                                         </div>
                                     </td>
                                     <td><div>
-                                            <!--<a href="{{ route('gourmet.add', ['id' => $gourmet->id]) }}">-->
-                                                <input type="button" class="btn btn-danger" value="削除">
+                                            <a href="{{ route('gourmet.delete', ['id' => $gourmet->id]) }}">
+                                                <input type="button" class="btn btn-danger" value="削除" onclick='return confirm("本当に削除してよろしいですか？")'>
                                             </a>
                                         </div>
                                     </td>

@@ -24,6 +24,7 @@ Route::controller(GourmetController::class)->middleware('auth')->group(function(
     Route::get('gourmet', 'index')->name('gourmet.index');
     Route::get('gourmet/edit', 'edit')->name('gourmet.edit');
     Route::post('gourmet/edit', 'update')->name('gourmet.update');
+    Route::get('gourmet/delete', 'delete')->name('gourmet.delete');
 });
 Auth::routes();
 

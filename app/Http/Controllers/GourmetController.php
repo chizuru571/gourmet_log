@@ -91,4 +91,15 @@ class GourmetController extends Controller
 
         return redirect('gourmet');
     }
+    
+    public function delete(Request $request)
+    {
+        // 該当するGourmet Modelを取得
+        $gourmet = Gourmet::find($request->id);
+
+        // 削除する
+        $gourmet->delete();
+
+        return redirect('gourmet');
+    }
 }
