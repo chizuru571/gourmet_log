@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Http\Controllers\GourmetController;
+Route::controller(GourmetController::class)->middleware('auth')->group(function() {
+    Route::get('gourmet/create', 'add')->name('gourmet.add');
+    Route::post('gourmet/create', 'create')->name('gourmet.create');
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
