@@ -56,7 +56,7 @@
                                         </div>
                                     </td>
                                     <td><div>
-                                            <!--<a href="{{ route('gourmet.add', ['id' => $gourmet->id]) }}">-->
+                                            <a href="{{ route('gourmet.edit', ['id' => $gourmet->id]) }}">
                                                 <input type="button" class="btn btn-success" value="編集">
                                             </a>
                                         </div>

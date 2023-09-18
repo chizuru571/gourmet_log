@@ -53,4 +53,42 @@ class GourmetController extends Controller
         }
         return view('gourmet.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
+    
+    public function edit(Request $request)
+    {
+        // Gourmet Modelからデータを取得する
+        $gourmet = Gourmet::find($request->id);
+        if (empty($gourmet)) {
+            abort(404);
+        }
+        return view('gourmet.edit', ['gourmet_form' => $gourmet]);
+    }
+
+    public function update(Request $request)
+    {
+        // Validationをかける
+        $this->validate($request, Gourmet::$rules);
+        // Gourmet Modelからデータを取得する
+        $gourmet = Gourmet::find($request->id);
+        // 送信されてきたフォームデータを格納する
+       $gourmet = $request->all();
+
+        if ($request->remove == 'true') {
+            $gourmet['food_picture'] = null;
+        } elseif ($request->file('food_picture')) {
+            $path = $request->file('food_picture')->store('public/image');
+            $gourmet['food_picture'] = basename($path);
+        } else {
+            $gourmet['food_picture'] = $gourmet->food_picture;
+        }
+
+        unset($gourmet['food_picture']);
+        unset($gourmet['remove']);
+        unset($gourmet['_token']);
+
+        // 該当するデータを上書きして保存する
+        $gourmet->fill($gourmet_form)->save();
+
+        return redirect('gourmet');
+    }
 }

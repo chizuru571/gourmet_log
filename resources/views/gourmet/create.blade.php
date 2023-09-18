@@ -28,9 +28,9 @@
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
                         <div class="col-md-9">
-                            <label><input type="checkbox" name="category" value="japanese">日本料理</label>
-                            <label><input type="checkbox" name="category" value="indian">インド料理</label>
-                            <label><input type="checkbox" name="category" value="italian">イタリアン</label>
+                            <label><input type="checkbox" name="category" value="日本料理">日本料理</label>
+                            <label><input type="checkbox" name="category" value="インド料理">インド料理</label>
+                            <label><input type="checkbox" name="category" value="イタリアン">イタリアン</label>
                         </div>
                     </div>
                     <div class="form-group row">
