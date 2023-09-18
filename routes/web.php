@@ -21,6 +21,7 @@ use App\Http\Controllers\GourmetController;
 Route::controller(GourmetController::class)->middleware('auth')->group(function() {
     Route::get('gourmet/create', 'add')->name('gourmet.add');
     Route::post('gourmet/create', 'create')->name('gourmet.create');
+    Route::get('gourmet', 'index')->name('gourmet.index');
 });
 Auth::routes();
 
