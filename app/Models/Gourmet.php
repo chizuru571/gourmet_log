@@ -17,4 +17,5 @@ class Gourmet extends Model
         'review' => 'required',
         'comment' => 'required|max:300',
     );
+    protected $table = 'restaurants';
 }

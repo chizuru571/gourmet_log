@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">店名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="shop_name" value="{{ old('shop_name') }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -61,7 +61,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">電話番号</label>
                         <div class="col-md-10">
-                            <input type="tel" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('phone') }}">
+                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('tel') }}">
                         </div>
                     </div>
                     <div class="form-group row">
