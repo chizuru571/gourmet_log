@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="login-box card text-white">
+                <div class="login-box card text-black">
                     <div class="login-header card-header mx-auto">{{ __('messages.login') }}</div>
 
                     <div class="login-body card-body">

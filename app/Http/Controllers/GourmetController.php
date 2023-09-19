@@ -20,7 +20,7 @@ class GourmetController extends Controller
         $gourmet = new Gourmet;
         $form = $request->all();
         
-        // フォームから画像が送信されてきたら、保存して、$gourmet->image_path に画像のパスを保存する
+        // フォームから画像が送信されてきたら、保存して、$gourmet->food_picture に画像のパスを保存する
         if (isset($form['food_picture'])) {
             $path = $request->file('food_picture')->store('public/image');
             $gourmet->food_picture = basename($path);
@@ -37,8 +37,8 @@ class GourmetController extends Controller
         $gourmet->fill($form);
         $gourmet->save();
         
-        // gourmet/createにリダイレクトする
-        return redirect('gourmet/create');
+        // gourmetにリダイレクトする
+        return redirect('gourmet');
     }
     
     public function index(Request $request)
@@ -48,13 +48,13 @@ class GourmetController extends Controller
             // 検索されたら検索結果を取得する
             $posts = Gourmet::where('title', $cond_title)->get();
         } else {
-            // それ以外はすべてのニュースを取得する
+            // それ以外はすべてのお店情報を取得する
             $posts = Gourmet::all();
         }
         return view('gourmet.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
-    public function edit(Request $request)
+   public function edit(Request $request)
     {
         // Gourmet Modelからデータを取得する
         $gourmet = Gourmet::find($request->id);
@@ -71,26 +71,27 @@ class GourmetController extends Controller
         // Gourmet Modelからデータを取得する
         $gourmet = Gourmet::find($request->id);
         // 送信されてきたフォームデータを格納する
-       $gourmet = $request->all();
+        $gourmet_form = $request->all();
 
         if ($request->remove == 'true') {
-            $gourmet['food_picture'] = null;
+            $gourmet_form['food_picture'] = null;
         } elseif ($request->file('food_picture')) {
             $path = $request->file('food_picture')->store('public/image');
-            $gourmet['food_picture'] = basename($path);
+            $gourmet_form['food_picture'] = basename($path);
         } else {
-            $gourmet['food_picture'] = $gourmet->food_picture;
+            $gourmet_form['food_picture'] = $gourmet->food_picture;
         }
 
-        unset($gourmet['food_picture']);
-        unset($gourmet['remove']);
-        unset($gourmet['_token']);
+        unset($gourmet_form['food_picture']);
+        unset($gourmet_form['remove']);
+        unset($gourmet_form['_token']);
 
         // 該当するデータを上書きして保存する
         $gourmet->fill($gourmet_form)->save();
 
         return redirect('gourmet');
     }
+
     
     public function delete(Request $request)
     {
