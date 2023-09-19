@@ -31,9 +31,11 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">料理写真</label>
-                        <div class="col-md-9">
-                            <img src="{{ secure_asset('storage/image/' . $gourmet->food_picture) }}">
+                        <label class="col-md-9">料理写真</label>
+                        <div class="image col-md-3">
+                                @if ($gourmet->food_picture)
+                                    <img src="{{ secure_asset('storage/image/' . $gourmet->food_picture) }}">
+                                @endif
                         </div>
                     </div>
                     <div class="form-group row">
