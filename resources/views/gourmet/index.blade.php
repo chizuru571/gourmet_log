@@ -50,7 +50,7 @@
                                     <td>{{ $gourmet->review }}</td>
                                     <td>{{ $gourmet->comment }}</td>
                                     <td><div>
-                                            <!--<a href="{{ route('gourmet.add', ['id' => $gourmet->id]) }}">-->
+                                            <a href="{{ route('gourmet.detail', ['id' => $gourmet->id]) }}">
                                                 <input type="button" class="btn btn-primary" value="詳細">
                                             </a>
                                         </div>

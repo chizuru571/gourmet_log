@@ -46,7 +46,7 @@ class GourmetController extends Controller
         $cond_title = $request->cond_title;
         if ($cond_title != '') {
             // 検索されたら検索結果を取得する
-            $posts = Gourmet::where('title', $cond_title)->get();
+            $posts = Gourmet::where('shop_name', $cond_title)->get();
         } else {
             // それ以外はすべてのお店情報を取得する
             $posts = Gourmet::all();
@@ -103,4 +103,18 @@ class GourmetController extends Controller
 
         return redirect('gourmet');
     }
+    
+    // 詳細を表示するアクションを追加
+    public function detail(Request $request)
+    {
+        // 指定されたお店を取得する
+        $gourmet = Gourmet::find($request->id);
+        if (empty($gourmet)) {
+            abort(404);
+        }
+        
+        return view('gourmet.detail', ['gourmet' => $gourmet]);
+    }
+    
 }
+
