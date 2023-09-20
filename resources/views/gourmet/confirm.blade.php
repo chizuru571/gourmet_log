@@ -67,9 +67,11 @@
                         </div>
                         <div class="col-md-2">　</div>
                         <div class="col-md-5">
+                            <a href="{{ route('gourmet.create')}}">
                             <input type="hidden" name="id" value="{{ $gourmet_form->id }}">
                             @csrf
                             <input type="submit" class="btn btn-primary" value="登録する">
+                            </a>
                         </div>
                         </div>
                         </div>

@@ -21,11 +21,14 @@ use App\Http\Controllers\GourmetController;
 Route::controller(GourmetController::class)->middleware('auth')->group(function() {
     Route::get('gourmet/create', 'add')->name('gourmet.add');
     Route::post('gourmet/create', 'create')->name('gourmet.create');
+    Route::get('gourmet/confirm', 'confirm')->name('gourmet.confirm');
+    Route::post('gourmet/confirm', 'send')->name('gourmet.send');    
     Route::get('gourmet', 'index')->name('gourmet.index');
     Route::get('gourmet/edit', 'edit')->name('gourmet.edit');
     Route::post('gourmet/edit', 'update')->name('gourmet.update');
     Route::get('gourmet/delete', 'delete')->name('gourmet.delete');
     Route::get('gourmet/detail', 'detail')->name('gourmet.detail');
+    Route::get('gourmet/confirm', 'confirm')->name('gourmet.confirm');
 });
 Auth::routes();
 

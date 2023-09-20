@@ -8,38 +8,37 @@ use App\Models\Gourmet;
 
 class GourmetController extends Controller
 {
+    private $formItems = ["shop_name", "name_katakana", "category","review","food_picture","map_url","tel","comment"];
+    // 入力画面を表示するアクションを追加
     public function add()
     {
         return view('gourmet.create');
     }
     
+     // 入力内容を確認画面に送信するアクションを追加
     public function create(Request $request)
     {
         $this->validate($request, Gourmet::$rules);
-
-        $gourmet = new Gourmet;
-        $form = $request->all();
+        $input = $request->only($this->formItems);
+        /*$form = $request->all();*/
         
-        // フォームから画像が送信されてきたら、保存して、$gourmet->food_picture に画像のパスを保存する
-        if (isset($form['food_picture'])) {
-            $path = $request->file('food_picture')->store('public/image');
-            $gourmet->food_picture = basename($path);
-        } else {
-            $gourmet->food_picture = null;
-        }
+        $request->session()->put("form_input", $input);
+        return redirect('gourmet/confirm');
 
-        // フォームから送信されてきた_tokenを削除する
-        unset($form['_token']);
-        // フォームから送信されてきたfood_pictureを削除する
-        unset($form['food_picture']);
-
-        // データベースに保存する
-        $gourmet->fill($form);
-        $gourmet->save();
-        
-        // gourmetにリダイレクトする
+    }
+    
+    // 確認画面を表示するアクションを追加
+    public function confirm(Request $request)
+    {
+        return view('gourmet.confirm', ['gourmet' => $gourmet]);
+    }
+    
+     // 確認画面の内容を送信するアクションを追加
+    public function send(Request $request)
+    {
         return redirect('gourmet');
     }
+
     
     public function index(Request $request)
     {
@@ -116,5 +115,6 @@ class GourmetController extends Controller
         return view('gourmet.detail', ['gourmet' => $gourmet]);
     }
     
+
 }
 
