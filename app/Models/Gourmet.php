@@ -13,7 +13,7 @@ class Gourmet extends Model
     public static $rules = array(
         'shop_name' => 'required|max:20',
         'name_katakana' => 'required',
-        'category' => 'required',
+        'categories' => 'required|array',
         'review' => 'required',
         'comment' => 'required|max:300',
     );

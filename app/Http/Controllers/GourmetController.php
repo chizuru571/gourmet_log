@@ -10,12 +10,13 @@ class GourmetController extends Controller
 {
     public function add()
     {
-        return view('gourmet.create');
+        $categories=['日本料理','インド料理','イタリアン'];
+        return view('gourmet.create', compact('categories'));
     }
     
      // 入力内容を確認画面に送信するアクションを追加
     public function confirm(Request $request)
-    {
+    { // dd($request);
         // Validationを行う
         $this->validate($request, Gourmet::$rules);
 
@@ -27,12 +28,6 @@ class GourmetController extends Controller
      // 確認画面の内容を送信するアクションを追加
     public function send(Request $request)
     {
-        // $input = $request->session()->get("form_input");
-        // //セッションに値が無い時はフォームに戻る
-        // if(!$input){
-        //     return redirect('gourmet/confirm');
-        // }
-        
         // Validationを行う
         $this->validate($request, Gourmet::$rules);
         //dd('send');
@@ -56,10 +51,6 @@ class GourmetController extends Controller
         // データベースに保存する
         $gourmet->fill($form);
         $gourmet->save();
-        
-        //セッションを空にする
-        // $request->session()->forget("form_input");
-        
         return redirect('gourmet');
     }
 
@@ -87,6 +78,18 @@ class GourmetController extends Controller
         return view('gourmet.edit', ['gourmet_form' => $gourmet]);
     }
 
+     // 入力内容を確認画面に送信するアクションを追加
+    public function editconfirm(Request $request)
+    {
+        // Validationを行う
+        $this->validate($request, Gourmet::$rules);
+
+        // $gourmet = new Gourmet;
+        $gourmet = $request->all();
+        return view('gourmet.editconfirm', ['gourmet_form' => $gourmet]);
+
+    }
+
     public function update(Request $request)
     {
         // Validationをかける
@@ -96,14 +99,14 @@ class GourmetController extends Controller
         // 送信されてきたフォームデータを格納する
         $gourmet_form = $request->all();
 
-        if ($request->remove == 'true') {
-            $gourmet_form['food_picture'] = null;
-        } elseif ($request->file('food_picture')) {
-            $path = $request->file('food_picture')->store('public/image');
-            $gourmet_form['food_picture'] = basename($path);
-        } else {
-            $gourmet_form['food_picture'] = $gourmet->food_picture;
-        }
+        // if ($request->remove == 'true') {
+        //     $gourmet_form['food_picture'] = null;
+        // } elseif ($request->file('food_picture')) {
+        //     $path = $request->file('food_picture')->store('public/image');
+        //     $gourmet_form['food_picture'] = basename($path);
+        // } else {
+        //     $gourmet_form['food_picture'] = $gourmet->food_picture;
+        // }
 
         unset($gourmet_form['food_picture']);
         unset($gourmet_form['remove']);

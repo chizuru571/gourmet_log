@@ -16,21 +16,25 @@
                     <div class="form-group row">
                         <label class="col-md-3">店名</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="shop_name" value="{{ old('shop_name') }}">
+                            <input type="text" class="form-control" name="shop_name" value="{{ old('shop_name', request('shop_name')) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">店名 フリガナ</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="name_katakana" value="{{ old('name_katakana') }}">
+                            <input type="text" class="form-control" name="name_katakana" value="{{ old('name_katakana'),request('name_katakana') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
                         <div class="col-md-9">
-                            <label><input type="checkbox" name="category" value="日本料理">日本料理</label>
-                            <label><input type="checkbox" name="category" value="インド料理">インド料理</label>
-                            <label><input type="checkbox" name="category" value="イタリアン">イタリアン</label>
+                            @foreach($categories as $category)
+                                <label><input type="checkbox" name="categories[]" value="{{$category}}" 
+                                    @if(!empty(old('categories',request('categories'))))
+                                        {{in_array($category, old('categories',request('categories'))) ? "checked" : ""}}
+                                    @endif
+                                    >{{$category}}</label>
+                            @endforeach
                         </div>
                     </div>
                     <div class="form-group row">
@@ -49,32 +53,31 @@
                     <div class="form-group row">
                         <label class="col-md-3">料理写真</label>
                         <div class="col-md-9">
-                            <input type="file" class="form-control-file" name="food_picture">
+                            <input type="file" class="form-control-file" name="food_picture",>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">Google Map URL</label>
                         <div class="col-md-9">
-                            <input type="url" class="form-control" name="map_url" value="{{ old('map_url') }}" placeholder="https://example.com" >
+                            <input type="url" class="form-control" name="map_url" value="{{ old('map_url') ,request('map_url') }}" placeholder="https://example.com" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">電話番号</label>
                         <div class="col-md-9">
-                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('tel') }}">
+                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('tel') ,request('tel')}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">コメント</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="comment" rows="2">{{ old('comment') }}</textarea>
+                            <textarea class="form-control" name="comment" rows="2">{{ old('comment') ,request('comment')}}</textarea>
                         </div>
                     </div>
                     @csrf
                     <div class ="row">
                     <div class="col-12 d-flex justify-content-center">
                     <div class="row mt-3">
-                        <div class="col-md-2">　</div>
                         <div class="col-md-5">
                             @csrf
                             <input type="submit" class="btn btn-primary" value="確認画面へ">

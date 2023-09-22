@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>お店の編集</h2>
-                <form action="{{ route('gourmet.confirm') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('gourmet.editconfirm') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -86,7 +86,7 @@
                             @csrf
                             <div class ="row">
                                 <div class="col-12 d-flex justify-content-center">
-                                    <input type="submit" class="btn btn-secondary" value="確認画面へ">
+                                    <input type="submit" class="btn btn-secondary" value="確認画面へ" >
                                 </div>
                             </div>
                         </div>
