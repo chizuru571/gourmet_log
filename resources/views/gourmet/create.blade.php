@@ -72,10 +72,17 @@
                     </div>
                     @csrf
                     <div class ="row">
-                        <div class="col-12 d-flex justify-content-center">
-                            <input type="submit" class="btn btn-secondary" value="確認画面へ">
+                    <div class="col-12 d-flex justify-content-center">
+                    <div class="row mt-3">
+                        <div class="col-md-2">　</div>
+                        <div class="col-md-5">
+                            @csrf
+                            <input type="submit" class="btn btn-primary" value="確認画面へ">
+                            </a>
                         </div>
-                    </div>
+                        </div>
+                        </div>
+                        </div>
                 </form>
             </div>
         </div>

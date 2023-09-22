@@ -19,16 +19,25 @@ Route::get('/', function () {
 
 use App\Http\Controllers\GourmetController;
 Route::controller(GourmetController::class)->middleware('auth')->group(function() {
+    //作成ページ
     Route::get('gourmet/create', 'add')->name('gourmet.add');
-    Route::post('gourmet/create', 'create')->name('gourmet.create');
-    Route::get('gourmet/confirm', 'confirm')->name('gourmet.confirm');
-    Route::post('gourmet/confirm', 'send')->name('gourmet.send');    
+    //確認ページ
+    Route::post('gourmet/confirm', 'confirm')->name('gourmet.confirm');
+    //送信ページ
+    Route::post('gourmet/send', 'send')->name('gourmet.send');
+    //一覧ページ
     Route::get('gourmet', 'index')->name('gourmet.index');
+    //編集ページ
     Route::get('gourmet/edit', 'edit')->name('gourmet.edit');
-    Route::post('gourmet/edit', 'update')->name('gourmet.update');
+    //確認ページ
+    Route::post('gourmet/edit_confirm', 'edit_confirm')->name('gourmet.edit_confirm');
+    //更新ページ
+    Route::post('gourmet/update', 'update')->name('gourmet.update');
+    //削除
     Route::get('gourmet/delete', 'delete')->name('gourmet.delete');
+    //詳細ページ
     Route::get('gourmet/detail', 'detail')->name('gourmet.detail');
-    Route::get('gourmet/confirm', 'confirm')->name('gourmet.confirm');
+
 });
 Auth::routes();
 

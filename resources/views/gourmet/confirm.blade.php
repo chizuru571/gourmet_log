@@ -1,81 +1,100 @@
 @extends('layouts.gourmet')
-@section('title'){{ $gourmet->shop_name }}@endsection
-
+@section('title', 'Gourmet Logの確認画面')
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>{{ $gourmet->shop_name }}詳細</h2>
+                <form action="{{ route('gourmet.send') }}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label class="col-md-3">店名</label>
-                        <div class="col-md-9">
-                            <p class="shop_name mx-auto">{{ $gourmet->shop_name }}</p>
-                        </div>
+                        @if (array_key_exists('shop_name', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["shop_name"] }}
+                            </div>
+                            <input type="hidden" name="shop_name" value="{{ $gourmet['shop_name'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">店名 フリガナ</label>
-                        <div class="col-md-9">
-                            <p class="name_katakana mx-auto">{{ $gourmet->name_katakana }}</p>
-                        </div>
+                        <label class="col-md-3">店名　フリガナ</label>
+                        @if (array_key_exists('name_katakana', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["name_katakana"] }}
+                            </div>
+                            <input type="hidden" name="name_katakana" value="{{ $gourmet['name_katakana'] }}">
                     </div>
+                        @endif
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
-                        <div class="col-md-9">
-                            <p class="category mx-auto">{{ $gourmet->category }}</p>
-                        </div>
+                        @if (array_key_exists('category', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["category"] }}
+                            </div>
+                            <input type="hidden" name="category" value="{{ $gourmet['category'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">レビュー</label>
-                        <div class="col-md-9">
-                            <p class="review mx-auto">{{ $gourmet->review }}</p>
-                        </div>
+                        @if (array_key_exists('review', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["review"] }}
+                            </div>
+                            <input type="hidden" name="review" value="{{ $gourmet['review'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-9">料理写真</label>
-                        <div class="image col-md-3">
-                                @if ($gourmet->food_picture)
-                                    <img src="{{ secure_asset('storage/image/' . $gourmet->food_picture) }}">
-                                @endif
-                        </div>
+                        <label class="col-md-3">料理写真</label>
+                        @if (array_key_exists('food_picture', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["food_picture"] }}
+                            </div>
+                            <input type="hidden" name="food_picture" value="{{ $gourmet['food_picture'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">Google Map URL</label>
-                        <div class="col-md-9">
-                            <p class="map_url mx-auto">{{ $gourmet->map_url }}</p>
-                        </div>
+                        @if (array_key_exists('map_url', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["map_url"] }}
+                            </div>
+                            <input type="hidden" name="map_url" value="{{ $gourmet['map_url'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">電話番号</label>
-                        <div class="col-md-9">
-                            <p class="tel mx-auto">{{ $gourmet->tel }}</p>
-                        </div>
+                        @if (array_key_exists('tel', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["tel"] }}
+                            </div>
+                            <input type="hidden" name="tel" value="{{ $gourmet['tel'] }}">
+                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">コメント</label>
-                        <div class="col-md-9">
-                            <p class="comment mx-auto">{{ $gourmet->comment }}</p>
-                        </div>
+                        @if (array_key_exists('comment', $gourmet))
+                            <div class="col-md-9">
+                                {{ $gourmet["comment"] }}
+                            </div>
+                            <input type="hidden" name="comment" value="{{ $gourmet['comment'] }}">
+                        @endif
                     </div>
                     @csrf
                     <div class ="row">
-                    <div class="col-12 d-flex justify-content-center">
-                    <div class="row mt-3">
-                        <div class="col-md-5">
-                            <a href="{{ route('gourmet.index')}}">
-                            <input type="submit" class="btn btn-success" value="戻る">
-                            </a>
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="row mt-3">
+                                <div class="col-md-5">
+                                    <a href="{{ route('gourmet.create')}}">
+                                    <input type="submit" class="btn btn-success" value="修正する">
+                                    </a>
+                                </div>
+                                <div class="col-md-2">　</div>
+                                <div class="col-md-5">
+                                    @csrf
+                                    <input type="submit" class="btn btn-primary" value="登録する">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-2">　</div>
-                        <div class="col-md-5">
-                            <a href="{{ route('gourmet.create')}}">
-                            <input type="hidden" name="id" value="{{ $gourmet_form->id }}">
-                            @csrf
-                            <input type="submit" class="btn btn-primary" value="登録する">
-                            </a>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

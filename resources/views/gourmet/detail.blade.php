@@ -31,10 +31,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-9">料理写真</label>
-                        <div class="image col-md-3">
+                        <label class="col-md-3">料理写真</label>
+                        <div class="image col-md-9">
                                 @if ($gourmet->food_picture)
-                                    <img src="{{ secure_asset('storage/image/' . $gourmet->food_picture) }}">
+                                    <img src="{{ secure_asset('storage/image/' . $gourmet->food_picture) }}" width="180" height="180">
                                 @endif
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div class ="row">
                         <div class="col-12 d-flex justify-content-center">
                             <a href="{{ route('gourmet.index')}}">
-                            <input type="submit" class="btn btn-secondary" value="お店リストへ戻る">
+                            <input type="submit" class="btn btn-light" value="お店リストへ戻る">
                         </div>
                     </div>
             </div>

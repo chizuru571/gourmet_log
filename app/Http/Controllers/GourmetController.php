@@ -8,34 +8,58 @@ use App\Models\Gourmet;
 
 class GourmetController extends Controller
 {
-    private $formItems = ["shop_name", "name_katakana", "category","review","food_picture","map_url","tel","comment"];
-    // 入力画面を表示するアクションを追加
     public function add()
     {
         return view('gourmet.create');
     }
     
      // 入力内容を確認画面に送信するアクションを追加
-    public function create(Request $request)
-    {
-        $this->validate($request, Gourmet::$rules);
-        $input = $request->only($this->formItems);
-        /*$form = $request->all();*/
-        
-        $request->session()->put("form_input", $input);
-        return redirect('gourmet/confirm');
-
-    }
-    
-    // 確認画面を表示するアクションを追加
     public function confirm(Request $request)
     {
-        return view('gourmet.confirm', ['gourmet' => $gourmet]);
+        // Validationを行う
+        $this->validate($request, Gourmet::$rules);
+
+        // $gourmet = new Gourmet;
+        $gourmet = $request->all();
+        return view('gourmet.confirm',compact('gourmet'));
+
     }
-    
      // 確認画面の内容を送信するアクションを追加
     public function send(Request $request)
     {
+        // $input = $request->session()->get("form_input");
+        // //セッションに値が無い時はフォームに戻る
+        // if(!$input){
+        //     return redirect('gourmet/confirm');
+        // }
+        
+        // Validationを行う
+        $this->validate($request, Gourmet::$rules);
+        //dd('send');
+
+        $gourmet = new Gourmet;
+        $form = $request->all();
+
+        // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
+        if (isset($form['image'])) {
+            $path = $request->file('image')->store('public/image');
+            $gourmet->food_picture = basename($path);
+        } else {
+            $gourmet->food_picture = null;
+        }
+
+        // フォームから送信されてきた_tokenを削除する
+        unset($gourmet['_token']);
+        // フォームから送信されてきたimageを削除する
+        unset($gourmet['image']);
+
+        // データベースに保存する
+        $gourmet->fill($form);
+        $gourmet->save();
+        
+        //セッションを空にする
+        // $request->session()->forget("form_input");
+        
         return redirect('gourmet');
     }
 
@@ -114,7 +138,5 @@ class GourmetController extends Controller
         
         return view('gourmet.detail', ['gourmet' => $gourmet]);
     }
-    
-
 }
 
