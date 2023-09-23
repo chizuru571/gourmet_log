@@ -8,6 +8,9 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                <a href="{{ route('gourmet.category.index') }}" role="button" class="btn btn-primary">カテゴリー一覧</a>
+            </div>
+            <div class="col-md-4">
                 <a href="{{ route('gourmet.add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
             <div class="col-md-8">

@@ -1,6 +1,5 @@
 {{-- layouts/memo.blade.phpを読み込む --}}
 @extends('layouts.gourmet')
-{{-- memo.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
 @section('title', 'カテゴリー一覧・新規登録')
 
 {{-- memo.blade.phpの@yield('content')に以下のタグを埋め込む --}}
@@ -8,13 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-            <h5>新規登録<h5>
+            <h5>カテゴリー一覧<h5>
             </div>
             <div class="col-md-8 mx-auto">
                 <form action="{{ route('gourmet.category.create') }}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="category" value="{{ old('category') }}">
+                            <input type="text" class="form-control" name="category_name" value="{{ old('category_name')}}">
                         </div>
                         <div class="col-md-2">
                             <input type="submit" class="btn btn-primary" value="登録">
@@ -49,15 +48,15 @@
                             @foreach($posts as $category)
                                 <tr>
                                     <th>{{ $category->id }}</th>
-                                    <td>{{ Str::limit($category->category, 100) }}</td>
+                                    <td>{{ $category->category_name }}</td>
                                     <td><div>
-                                            <a href="{{ route('groumet.category.edit', ['id' => $category->id]) }}">
+                                            <a href="{{ route('gourmet.category.edit', ['id' => $category->id]) }}">
                                                 <input type="button" class="btn btn-success" value="編集">
                                             </a>
                                         </div>
                                     </td>
                                     <td><div>
-                                            <a href="{{ route('groumet.category.delete', ['id' => $category->id]) }}">
+                                            <a href="{{ route('gourmet.category.delete', ['id' => $category->id]) }}">
                                                 <input type="button" class="btn btn-danger" value="削除" onclick='return confirm("本当に削除してよろしいですか？")'>
                                             </a>
                                         </div>

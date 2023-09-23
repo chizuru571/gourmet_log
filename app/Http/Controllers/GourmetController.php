@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gourmet;
+use App\Models\Category;
 
 class GourmetController extends Controller
 {
@@ -143,13 +144,21 @@ class GourmetController extends Controller
         
         return view('gourmet.detail', ['gourmet' => $gourmet]);
     }
+
     //カテゴリー一覧を表示するアクションを追加
-    public function category_index()
+    public function category_index(Request $request)
     {
-        return view('gourmet.category.index');
+        $cond_title = $request->cond_title;
+        if ($cond_title != '') {
+            // 検索されたら検索結果を取得する
+            $posts = Category::where('title', $cond_title)->get();
+        } else {
+            // それ以外はすべてのニュースを取得する
+            $posts = Category::all();
+        }
+        return view('gourmet.category.index', ['posts' => $posts]);
     }
     
-    //カテゴリー新規作成を表示するアクションを追加
     public function category_create(Request $request)
     {   // Validationを行う
         $this->validate($request,Category::$rules);
@@ -165,6 +174,43 @@ class GourmetController extends Controller
         $category->save();
         
         // リダイレクトする
+        return redirect('gourmet/category');
+    }
+    
+    public function category_delete(Request $request)
+    {
+        // 該当するCategory Modelを取得
+        $category = Category::find($request->id);
+
+        // 削除する
+        $category->delete();
+
+        return redirect('gourmet/category');
+    }
+    
+  public function category_edit(Request $request)
+    {
+        // Category Modelからデータを取得する
+        $category = Category::find($request->id);
+        if (empty($category)) {
+            abort(404);
+        }
+        return view('gourmet.category.edit', ['category_form' => $category]);
+    }
+    
+    public function category_update(Request $request)
+    {
+        // Validationをかける
+        $this->validate($request, Category::$rules);
+        // Modelからデータを取得する
+        $category = Category::find($request->id);
+        // 送信されてきたフォームデータを格納する
+        $category_form = $request->all();
+        unset($category_form['_token']);
+
+        // 該当するデータを上書きして保存する
+        $category->fill($category_form)->save();
+
         return redirect('gourmet/category');
     }
 }

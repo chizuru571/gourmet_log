@@ -40,12 +40,15 @@ Route::controller(GourmetController::class)->middleware('auth')->group(function(
     //詳細ページ
     Route::get('gourmet/detail', 'detail')->name('gourmet.detail');
     //カテゴリー一覧ページ
+    Route::get('gourmet/category', 'category_add')->name('gourmet.category.add');
     Route::get('gourmet/category', 'category_index')->name('gourmet.category.index');
-    Route::post('gourmet/category', 'category_cteate')->name('gourmet.category.create');
+    Route::post('gourmet/category', 'category_create')->name('gourmet.category.create');
     //カテゴリー編集ページ
     Route::get('gourmet/category/edit', 'category_edit')->name('gourmet.category.edit');
     //カテゴリー更新ページ
     Route::post('gourmet/category/update', 'category_update')->name('gourmet.category.update');
+    //カテゴリー削除ページ
+    Route::get('gourmet/category/delete', 'category_delete')->name('gourmet.category.delete');
 
 });
 Auth::routes();
