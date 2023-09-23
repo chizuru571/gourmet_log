@@ -21,7 +21,7 @@ use App\Http\Controllers\GourmetController;
 Route::controller(GourmetController::class)->middleware('auth')->group(function() {
     //作成ページ
     Route::get('gourmet/create', 'add')->name('gourmet.add');
-    // Route::post('gourmet/create', 'add')->name('gourmet.create.back');
+    Route::post('gourmet/create', 'add')->name('gourmet.create.back');
     //確認ページ
     Route::post('gourmet/confirm', 'confirm')->name('gourmet.confirm');
     //送信ページ
@@ -39,6 +39,13 @@ Route::controller(GourmetController::class)->middleware('auth')->group(function(
     Route::get('gourmet/delete', 'delete')->name('gourmet.delete');
     //詳細ページ
     Route::get('gourmet/detail', 'detail')->name('gourmet.detail');
+    //カテゴリー一覧ページ
+    Route::get('gourmet/category', 'category_index')->name('gourmet.category.index');
+    Route::post('gourmet/category', 'category_cteate')->name('gourmet.category.create');
+    //カテゴリー編集ページ
+    Route::get('gourmet/category/edit', 'category_edit')->name('gourmet.category.edit');
+    //カテゴリー更新ページ
+    Route::post('gourmet/category/update', 'category_update')->name('gourmet.category.update');
 
 });
 Auth::routes();

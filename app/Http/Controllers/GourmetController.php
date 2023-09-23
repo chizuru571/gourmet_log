@@ -11,7 +11,9 @@ class GourmetController extends Controller
     public function add()
     {
         $categories=['日本料理','インド料理','イタリアン'];
-        return view('gourmet.create', compact('categories'));
+        // $reviews=['1','2','3','4','5'];
+        // return view('gourmet.create', compact('categories','reviews'));
+         return view('gourmet.create', compact('categories'));
     }
     
      // 入力内容を確認画面に送信するアクションを追加
@@ -140,6 +142,30 @@ class GourmetController extends Controller
         }
         
         return view('gourmet.detail', ['gourmet' => $gourmet]);
+    }
+    //カテゴリー一覧を表示するアクションを追加
+    public function category_index()
+    {
+        return view('gourmet.category.index');
+    }
+    
+    //カテゴリー新規作成を表示するアクションを追加
+    public function category_create(Request $request)
+    {   // Validationを行う
+        $this->validate($request,Category::$rules);
+
+        $category = new Category;
+        $form = $request->all();
+
+        // フォームから送信されてきた_tokenを削除する
+        unset($form['_token']);
+        
+        // データベースに保存する
+        $category->fill($form);
+        $category->save();
+        
+        // リダイレクトする
+        return redirect('gourmet/category');
     }
 }
 

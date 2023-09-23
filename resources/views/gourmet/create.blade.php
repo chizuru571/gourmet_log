@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">料理写真</label>
                         <div class="col-md-9">
-                            <input type="file" class="form-control-file" name="food_picture",>
+                            <input type="file" class="form-control-file" name="food_picture">
                         </div>
                     </div>
                     <div class="form-group row">
