@@ -25,14 +25,10 @@
                         @endif
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
-                        @if (array_key_exists('categories', $gourmet))
                             <div class="col-md-9">
-                                @foreach($gourmet['categories'] as $category)
-                                {{ $category }}
-                                <input type="hidden" name="categories[]" value="{{ $category }}">
-                                @endforeach
+                                {{ $category->name }}
+                                <input type="hidden" name="category_id" value="{{ $category->id }}">
                             </div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">レビュー</label>
@@ -47,7 +43,7 @@
                         <label class="col-md-3">料理写真</label>
                         @if (array_key_exists('food_picture', $gourmet))
                             <div class="col-md-9">
-                                {{ $gourmet["food_picture"] }}
+                                <img src="{{ secure_asset('storage/image/' . $gourmet["food_picture"]) }}" width="180" height="180">
                             </div>
                             <input type="hidden" name="food_picture" value="{{ $gourmet['food_picture'] }}">
                         @endif

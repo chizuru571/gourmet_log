@@ -13,7 +13,7 @@
                 <form action="{{ route('gourmet.category.create') }}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="category_name" value="{{ old('category_name')}}">
+                            <input type="text" class="form-control" name="name" value="{{ old('name')}}">
                         </div>
                         <div class="col-md-2">
                             <input type="submit" class="btn btn-primary" value="登録">
@@ -48,7 +48,7 @@
                             @foreach($posts as $category)
                                 <tr>
                                     <th>{{ $category->id }}</th>
-                                    <td>{{ $category->category_name }}</td>
+                                    <td>{{ $category->name }}</td>
                                     <td><div>
                                             <a href="{{ route('gourmet.category.edit', ['id' => $category->id]) }}">
                                                 <input type="button" class="btn btn-success" value="編集">

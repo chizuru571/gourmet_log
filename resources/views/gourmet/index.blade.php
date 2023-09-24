@@ -8,6 +8,9 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                <a href="{{ route('gourmet.dashboard') }}" role="button" class="btn btn-primary">トップページ</a>
+            </div>
+            <div class="col-md-4">
                 <a href="{{ route('gourmet.category.index') }}" role="button" class="btn btn-primary">カテゴリー一覧</a>
             </div>
             <div class="col-md-4">
@@ -49,7 +52,7 @@
                                 <tr>
                                     <th>{{ $gourmet->id }}</th>
                                     <td>{{ $gourmet->shop_name }}</td>
-                                    <td>{{ $gourmet->category }}</td>
+                                    <td>{{ $gourmet->category->name }}</td>
                                     <td>{{ $gourmet->review }}</td>
                                     <td>{{ $gourmet->comment }}</td>
                                     <td><div>

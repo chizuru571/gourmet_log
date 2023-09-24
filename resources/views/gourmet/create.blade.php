@@ -22,18 +22,18 @@
                     <div class="form-group row">
                         <label class="col-md-3">店名 フリガナ</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="name_katakana" value="{{ old('name_katakana'),request('name_katakana') }}">
+                            <input type="text" class="form-control" name="name_katakana" value="{{ old('name_katakana', request('name_katakana')) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
                         <div class="col-md-9">
                             @foreach($categories as $category)
-                                <label><input type="checkbox" name="categories[]" value="{{$category}}" 
-                                    @if(!empty(old('categories',request('categories'))))
-                                        {{in_array($category, old('categories',request('categories'))) ? "checked" : ""}}
+                                <label><input type="radio" name="category_id" value="{{$category->id}}" 
+                                    @if(!empty(old('category_id',request('category_id'))))
+                                        {{ $category->id == old('category_id',request('category_id')) ? "checked" : ""}}
                                     @endif
-                                    >{{$category}}</label>
+                                    >{{$category->name}}</label>
                             @endforeach
                         </div>
                     </div>
@@ -41,37 +41,35 @@
                         <label class="col-md-3">レビュー（最高:5 / 最低:1）</label>
                         <div class="col-md-9">
                         <select name="review">
-                          <option value="">下記の中から選択してください</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                            <option value="">下記の中から選択してください</option>
+                            @foreach($reviews as $review)
+                                <option value="{{$review}}" {{ old('review',request('review'))==$review ? "selected" :""}}>{{$review}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">料理写真</label>
                         <div class="col-md-9">
-                            <input type="file" class="form-control-file" name="food_picture">
+                            <input type="file" class="form-control-file" name="image">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">Google Map URL</label>
                         <div class="col-md-9">
-                            <input type="url" class="form-control" name="map_url" value="{{ old('map_url') ,request('map_url') }}" placeholder="https://example.com" >
+                            <input type="url" class="form-control" name="map_url" value="{{ old('map_url', request('map_url')) }}" placeholder="https://example.com" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">電話番号</label>
                         <div class="col-md-9">
-                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('tel') ,request('tel')}}">
+                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ old('tel', request('tel')) }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">コメント</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="comment" rows="2">{{ old('comment') ,request('comment')}}</textarea>
+                            <textarea class="form-control" name="comment" rows="2">{{ old('comment', request('comment')) }}</textarea>
                         </div>
                     </div>
                     @csrf

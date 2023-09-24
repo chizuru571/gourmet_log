@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Gourmet extends Model
 {
     use HasFactory;
+    protected $table = 'restaurants';
     protected $guarded = array('id');
 
     public static $rules = array(
         'shop_name' => 'required|max:20',
         'name_katakana' => 'required',
-        'categories' => 'required|array',
+        'category_id' => 'required',
         'review' => 'required',
         'comment' => 'required|max:300',
     );
-    protected $table = 'restaurants';
+    public function Category(){
+        return $this->belongsTo('App\Models\Category');
+    }
 }

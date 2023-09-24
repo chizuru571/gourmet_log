@@ -29,9 +29,13 @@
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
                         <div class="col-md-9">
-                            <label><input type="checkbox" name="category" value="{{ $gourmet_form->category }}">日本料理</label>
-                            <label><input type="checkbox" name="category" value="{{ $gourmet_form->category }}">インド料理</label>
-                            <label><input type="checkbox" name="category" value="{{ $gourmet_form->category }}">イタリアン</label>
+                            @foreach($categories as $category)
+                                <label><input type="radio" name="category_id" value="{{$category->id}}" 
+                                    @if(!empty(old('category_id',request('category_id'))))
+                                        {{ $category->id == old('category_id',request('category_id')) ? "checked" : ""}}
+                                    @endif
+                                    >{{$category->name}}</label>
+                            @endforeach
                         </div>
                     </div>
                     <div class="form-group row">
@@ -39,11 +43,9 @@
                         <div class="col-md-9">
                         <select name="review">
                           <option value="">下記の中から選択してください</option>
-                          <option value="{{ $gourmet_form->review }}">1</option>
-                          <option value="{{ $gourmet_form->review }}">2</option>
-                          <option value="{{ $gourmet_form->review }}">3</option>
-                          <option value="{{ $gourmet_form->review }}">4</option>
-                          <option value="{{ $gourmet_form->review }}">5</option>
+                            @foreach($reviews as $review)
+                                <option value="{{$review}}" {{ old('review',request('review'))==$review ? "selected" :""}}>{{$review}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>

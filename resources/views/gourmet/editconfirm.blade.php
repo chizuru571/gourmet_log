@@ -25,20 +25,18 @@
                         @endif
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
-                        @if (array_key_exists('category', $gourmet_form))
                             <div class="col-md-9">
-                                {{ $gourmet_form["category"] }}
+                                {{ $category->name }}
+                                <input type="hidden" name="category_id" value="{{ $category->id }}">
                             </div>
-                            <input type="hidden" name="category" value="{{ $gourmet_form['category'] }}">
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3">レビュー</label>
-                        @if (array_key_exists('review', $gourmet_form))
+                        @if (array_key_exists('review', $gourmet))
                             <div class="col-md-9">
-                                {{ $gourmet_form["review"] }}
+                                {{ $gourmet["review"] }}
                             </div>
-                            <input type="hidden" name="review" value="{{ $gourmet_form['review'] }}">
+                            <input type="hidden" name="review" value="{{ $gourmet['review'] }}">
                         @endif
                     </div>
                     <div class="form-group row">
@@ -47,7 +45,7 @@
                             <div class="col-md-9">
                                 {{ $gourmet_form["food_picture"] }}
                             </div>
-                            <input type="hidden" name="food_picture" value="{{ $gourmet_form['food_picture'] }}">
+                            <input type="hidden" name="food_picture" value="{{ $gourmet_form['food_picture'] }}" width="180" height="180">
                         @endif
                     </div>
                     <div class="form-group row">

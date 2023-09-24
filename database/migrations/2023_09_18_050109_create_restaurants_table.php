@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('shop_name');
             $table->string('name_katakana');
-            $table->string('category');
+            $table->integer('category_id');
             $table->integer('review');
             $table->string('food_picture')->nullable();
             $table->string('map_url')->nullable();

@@ -21,7 +21,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">カテゴリー</label>
                         <div class="col-md-9">
-                            <p class="category mx-auto">{{ $gourmet->category }}</p>
+                            <p class="category mx-auto">{{ $gourmet->category->name }}</p>
                         </div>
                     </div>
                     <div class="form-group row">

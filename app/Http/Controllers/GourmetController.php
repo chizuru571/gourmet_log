@@ -11,10 +11,10 @@ class GourmetController extends Controller
 {
     public function add()
     {
-        $categories=['日本料理','インド料理','イタリアン'];
-        // $reviews=['1','2','3','4','5'];
-        // return view('gourmet.create', compact('categories','reviews'));
-         return view('gourmet.create', compact('categories'));
+        $categories = Category::all();
+        $reviews=['1','2','3','4','5'];
+        return view('gourmet.create', compact('categories','reviews'));
+        //return view('gourmet.create', compact('categories'));
     }
     
      // 入力内容を確認画面に送信するアクションを追加
@@ -25,7 +25,21 @@ class GourmetController extends Controller
 
         // $gourmet = new Gourmet;
         $gourmet = $request->all();
-        return view('gourmet.confirm',compact('gourmet'));
+        $category= Category::find($gourmet['category_id']);
+        if ($category == null){
+            abort(404);
+        }
+        // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
+        if (isset($gourmet['image'])) {
+            $path = $request->file('image')->store('public/image');
+            $gourmet['food_picture'] = basename($path);
+        } else {
+            $gourmet['food_picture'] = null;
+        }
+        unset($gourmet['_token']);
+        unset($gourmet['image']);
+        // dd($gourmet);
+        return view('gourmet.confirm',compact('gourmet','category'));
 
     }
      // 確認画面の内容を送信するアクションを追加
@@ -73,12 +87,14 @@ class GourmetController extends Controller
     
    public function edit(Request $request)
     {
+        $categories = Category::all();
+        $reviews=['1','2','3','4','5'];
         // Gourmet Modelからデータを取得する
         $gourmet = Gourmet::find($request->id);
         if (empty($gourmet)) {
             abort(404);
         }
-        return view('gourmet.edit', ['gourmet_form' => $gourmet]);
+        return view('gourmet.edit', ['gourmet_form' => $gourmet], compact('categories','reviews'));
     }
 
      // 入力内容を確認画面に送信するアクションを追加
@@ -88,8 +104,13 @@ class GourmetController extends Controller
         $this->validate($request, Gourmet::$rules);
 
         // $gourmet = new Gourmet;
+        
         $gourmet = $request->all();
-        return view('gourmet.editconfirm', ['gourmet_form' => $gourmet]);
+        $category= Category::find($gourmet['category_id']);
+        if ($category == null){
+            abort(404);
+        }
+        return view('gourmet.editconfirm', ['gourmet_form' => $gourmet],compact('gourmet','category'));
 
     }
 
@@ -139,6 +160,10 @@ class GourmetController extends Controller
         // 指定されたお店を取得する
         $gourmet = Gourmet::find($request->id);
         if (empty($gourmet)) {
+            abort(404);
+        }
+        $category= Category::find($gourmet['category_id']);
+        if ($category == null){
             abort(404);
         }
         
@@ -212,6 +237,12 @@ class GourmetController extends Controller
         $category->fill($category_form)->save();
 
         return redirect('gourmet/category');
+    }
+    
+    //トップページを表示するアクションを追加
+    public function dashboard()
+    {
+        return view('gourmet.dashboard');
     }
 }
 
