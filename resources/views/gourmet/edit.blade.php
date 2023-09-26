@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         <label class="col-md-3" for="food_picture">料理写真</label>
                         <div class="col-md-9">
-                            <input type="file" class="form-control-file" name="food_picture">
+                            <input type="file" class="form-control-file" name="image">
                             <div class="form-text text-info">
                                 設定中: {{ $gourmet_form->food_picture }}
                             </div>

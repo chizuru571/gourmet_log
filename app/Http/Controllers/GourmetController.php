@@ -53,7 +53,7 @@ class GourmetController extends Controller
         $gourmet = new Gourmet;
         $form = $request->all();
 
-        // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
+        // フォームから画像が送信されてきたら、保存して、image_path に画像のパスを保存する
         if (isset($form['image'])) {
             $path = $request->file('image')->store('public/image');
             $gourmet->food_picture = basename($path);
@@ -142,7 +142,7 @@ class GourmetController extends Controller
             $gourmet_form['food_picture'] = $gourmet->food_picture;
         }
 
-        unset($gourmet_form['food_picture']);
+        unset($gourmet_form['image']);
         unset($gourmet_form['remove']);
         unset($gourmet_form['_token']);
 
