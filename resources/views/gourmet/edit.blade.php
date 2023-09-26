@@ -73,7 +73,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">電話番号</label>
                         <div class="col-md-9">
-                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{ $gourmet_form->tel }}">
+                            <input type="tel" class="form-control" name="tel" value="{{ $gourmet_form->tel }}">
                         </div>
                     </div>
                     <div class="form-group row">
