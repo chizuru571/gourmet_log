@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gourmet;
 use App\Models\Category;
+use Illuminate\Pagination\Paginator;
 
 class GourmetController extends Controller
 {
@@ -14,7 +15,6 @@ class GourmetController extends Controller
         $categories = Category::all();
         $reviews=['1','2','3','4','5'];
         return view('gourmet.create', compact('categories','reviews'));
-        //return view('gourmet.create', compact('categories'));
     }
     
      // 入力内容を確認画面に送信するアクションを追加
@@ -29,7 +29,7 @@ class GourmetController extends Controller
         if ($category == null){
             abort(404);
         }
-        // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
+        // フォームから画像が送信されてきたら、保存して、image_path に画像のパスを保存する
         if (isset($gourmet['image'])) {
             $path = $request->file('image')->store('public/image');
             $gourmet['food_picture'] = basename($path);
@@ -82,6 +82,15 @@ class GourmetController extends Controller
             // それ以外はすべてのお店情報を取得する
             $posts = Gourmet::all();
         }
+        $query = Gourmet::query();
+        $posts = $query->orderBy('updated_at')->paginate(20);
+        
+        $gourmet = null;
+        if (empty($request->page) || $request->page == 1) {
+            if (count($posts) > 0) {
+                $gourmet = $posts->shift();
+            }
+        }
         return view('gourmet.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
@@ -123,14 +132,14 @@ class GourmetController extends Controller
         // 送信されてきたフォームデータを格納する
         $gourmet_form = $request->all();
 
-        // if ($request->remove == 'true') {
-        //     $gourmet_form['food_picture'] = null;
-        // } elseif ($request->file('food_picture')) {
-        //     $path = $request->file('food_picture')->store('public/image');
-        //     $gourmet_form['food_picture'] = basename($path);
-        // } else {
-        //     $gourmet_form['food_picture'] = $gourmet->food_picture;
-        // }
+        if ($request->remove == 'true') {
+            $gourmet_form['food_picture'] = null;
+        } elseif ($request->file('image')) {
+            $path = $request->file('image')->store('public/image');
+            $gourmet_form['food_picture'] = basename($path);
+        } else {
+            $gourmet_form['food_picture'] = $gourmet->food_picture;
+        }
 
         unset($gourmet_form['food_picture']);
         unset($gourmet_form['remove']);
@@ -173,13 +182,14 @@ class GourmetController extends Controller
     //カテゴリー一覧を表示するアクションを追加
     public function category_index(Request $request)
     {
-        $cond_title = $request->cond_title;
-        if ($cond_title != '') {
-            // 検索されたら検索結果を取得する
-            $posts = Category::where('title', $cond_title)->get();
-        } else {
-            // それ以外はすべてのニュースを取得する
-            $posts = Category::all();
+        $query = Category::query();
+        $posts = $query->orderBy('updated_at')->paginate(3);
+        
+        $category = null;
+        if (empty($request->page) || $request->page == 1) {
+            if (count($posts) > 0) {
+                $category = $posts->shift();
+            }
         }
         return view('gourmet.category.index', ['posts' => $posts]);
     }

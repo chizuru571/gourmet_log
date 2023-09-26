@@ -13,7 +13,7 @@
                 <form action="?" method="post" enctype="multipart/form-data">
                     <div class="form-group row mt-3">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" name="category_name" value="{{ $category_form->category_name }}">
+                            <input type="text" class="form-control" name="name" value="{{ $category_form->name }}">
                 </div>
                             @if (count($errors) > 0)
                             @foreach($errors->all() as $e)
