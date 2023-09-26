@@ -1,4 +1,4 @@
-@extends('layouts.gourmet')
+@extends('layouts.gourmet_vertical')
 @section('title', 'Gourmet Logの新規作成')
 @section('content')
     <div class="container">

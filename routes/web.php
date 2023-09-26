@@ -49,8 +49,10 @@ Route::controller(GourmetController::class)->middleware('auth')->group(function(
     Route::post('gourmet/category/update', 'category_update')->name('gourmet.category.update');
     //カテゴリー削除ページ
     Route::get('gourmet/category/delete', 'category_delete')->name('gourmet.category.delete');
-    //トップページ
+    //ダッシュボードページ
     Route::get('gourmet/dashboard', 'dashboard')->name('gourmet.dashboard');
+    //トップページ
+    Route::get('gourmet/top', 'top')->name('gourmet.top');
 
 });
 Auth::routes();

@@ -250,10 +250,16 @@ class GourmetController extends Controller
         return redirect('gourmet/category');
     }
     
-    //トップページを表示するアクションを追加
+    //ダッシュボードページを表示するアクションを追加
     public function dashboard()
     {
         return view('gourmet.dashboard');
+    }
+    
+    //トップページを表示するアクションを追加
+    public function top()
+    {
+        return view('gourmet.top');
     }
 }
 

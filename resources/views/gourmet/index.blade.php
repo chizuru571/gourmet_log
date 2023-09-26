@@ -7,10 +7,13 @@
             <h2>お店一覧</h2>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <a href="{{ route('gourmet.dashboard') }}" role="button" class="btn btn-primary">トップページ</a>
+            <div class="col-md-3">
+                <a href="{{ route('gourmet.top') }}" role="button" class="btn btn-primary">トップページ</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <a href="{{ route('gourmet.dashboard') }}" role="button" class="btn btn-primary">ダッシュボード</a>
+            </div>
+            <div class="col-md-3">
                 <a href="{{ route('gourmet.category.index') }}" role="button" class="btn btn-primary">カテゴリー一覧</a>
             </div>
             <div class="col-md-4">
