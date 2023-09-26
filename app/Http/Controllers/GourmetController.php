@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Gourmet;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
+use Auth;
 
 class GourmetController extends Controller
 {
