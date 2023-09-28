@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Gourmet;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
+use Carbon\Carbon;
 use Auth;
 
 class GourmetController extends Controller
@@ -254,12 +255,6 @@ class GourmetController extends Controller
     public function dashboard()
     {
         return view('gourmet.dashboard');
-    }
-    
-    //トップページを表示するアクションを追加
-    public function top()
-    {
-        return view('gourmet.top');
     }
 }
 

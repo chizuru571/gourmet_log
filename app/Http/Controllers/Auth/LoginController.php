@@ -40,6 +40,6 @@ class LoginController extends Controller
     
     public function redirectPath()
     {
-        return 'gourmet';
+        return ('gourmet/dashboard');
     }
 }

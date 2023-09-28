@@ -58,3 +58,6 @@ Route::controller(GourmetController::class)->middleware('auth')->group(function(
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\TopController as PublicGourmetController;
+Route::get('gourmet/top', [PublicGourmetController::class, 'top'])->name('gourmet.top');

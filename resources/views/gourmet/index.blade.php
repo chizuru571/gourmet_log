@@ -10,15 +10,6 @@
             <div class="col-md-3">
                 <a href="{{ route('gourmet.top') }}" role="button" class="btn btn-primary">トップページ</a>
             </div>
-            <div class="col-md-3">
-                <a href="{{ route('gourmet.dashboard') }}" role="button" class="btn btn-primary">ダッシュボード</a>
-            </div>
-            <div class="col-md-3">
-                <a href="{{ route('gourmet.category.index') }}" role="button" class="btn btn-primary">カテゴリー一覧</a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{ route('gourmet.add') }}" role="button" class="btn btn-primary">新規作成</a>
-            </div>
             <div class="col-md-8">
                 <form action="{{ route('gourmet.index') }}" method="get">
                     <div class="form-group row">

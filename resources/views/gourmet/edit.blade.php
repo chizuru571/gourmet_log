@@ -10,24 +10,24 @@
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
-                                <li>{{ $e }}</li>
+                                <font color="red"><li>{{ $e }}</li></font>
                             @endforeach
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-3" for="shop_name">店名</label>
+                        <label class="col-md-3" for="shop_name">店名 <font color="red">*</font></label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" name="shop_name" value="{{ $gourmet_form->shop_name }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3" for="name_katakana">店名 フリガナ</label>
+                        <label class="col-md-3" for="name_katakana">店名 フリガナ <font color="red">*</font></label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" name="name_katakana" value="{{ $gourmet_form->name_katakana }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">カテゴリー</label>
+                        <label class="col-md-3">カテゴリー <font color="red">*</font></label>
                         <div class="col-md-9">
                             @foreach($categories as $category)
                                 <label><input type="radio" name="category_id" value="{{$category->id}}" 
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">レビュー（最高:5 / 最低:1）</label>
+                        <label class="col-md-3">レビュー（最高:5 / 最低:1） <font color="red">*</font></label>
                         <div class="col-md-9">
                         <select name="review">
                           <option value="">下記の中から選択してください</option>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">コメント</label>
+                        <label class="col-md-3">コメント <font color="red">*</font></label>
                         <div class="col-md-9">
                             <textarea class="form-control" name="comment" rows="2">{{ $gourmet_form->comment }}</textarea>
                         </div>
