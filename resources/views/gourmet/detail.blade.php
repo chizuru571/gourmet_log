@@ -1,10 +1,10 @@
-@extends('layouts.gourmet')
+@extends('layouts.gourmet_vertical')
 @section('title'){{ $gourmet->shop_name }}@endsection
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-12">
                 <h2>{{ $gourmet->shop_name }}詳細</h2>
                     <div class="form-group row">
                         <label class="col-md-3"><strong>店名</strong></label>

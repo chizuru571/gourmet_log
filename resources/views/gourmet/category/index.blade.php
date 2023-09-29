@@ -1,15 +1,15 @@
 {{-- layouts/memo.blade.phpを読み込む --}}
-@extends('layouts.gourmet')
+@extends('layouts.gourmet_vertical')
 @section('title', 'カテゴリー一覧・新規登録')
 
 {{-- memo.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-8">
             <h5>カテゴリー一覧<h5>
             </div>
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-8">
                 <form action="{{ route('gourmet.category.create') }}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <div class="col-md-6">
@@ -32,7 +32,7 @@
         </div>
     </div>
         <div class="row">
-            <div class="list-memo col-md-8 mx-auto">
+            <div class="list-memo col-md-12">
             <hr>
                 <div class="row">
                     <table class="table table-light">

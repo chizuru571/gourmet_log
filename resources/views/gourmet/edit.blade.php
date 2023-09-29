@@ -1,10 +1,10 @@
-@extends('layouts.gourmet')
+@extends('layouts.gourmet_vertical')
 @section('title', 'Gourmet Logの編集')
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-12">
                 <h2>お店の編集</h2>
                 <form action="{{ route('gourmet.editconfirm') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)

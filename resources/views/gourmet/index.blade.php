@@ -1,4 +1,4 @@
-@extends('layouts.gourmet')
+@extends('layouts.gourmet_vertical')
 @section('title', 'Gourmet Logの一覧')
 
 @section('content')
@@ -7,9 +7,6 @@
             <h2>お店一覧</h2>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <a href="{{ route('gourmet.top') }}" role="button" class="btn btn-primary">トップページ</a>
-            </div>
             <div class="col-md-8">
                 <form action="{{ route('gourmet.index') }}" method="get">
                     <div class="form-group row">
